@@ -1,4 +1,4 @@
-FROM node:14-slim
+FROM node:slim
 
 # We don't need the standalone Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
@@ -26,8 +26,9 @@ COPY package*.json ./
 COPY . /app
 
 RUN npm install
+#RUN npm install pm2@latest -g
 
 EXPOSE 8080
-CMD [ "node", "index.js" ]
+CMD [ "npm", "run", "start:pm2" ]
 
 

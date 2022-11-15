@@ -16,12 +16,13 @@ async function doScreenCapture(url, site_name) {
   const cloudinary_options = {
     public_id: `newsshot/${site_name}`,
   };
-  const browser = await puppeteer.launch({
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage({
     executablePath: "/usr/bin/google-chrome",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
-  const page = await browser.newPage();
-  await page.goto(url, { waitUntil: "networkidle0" });
+  }
+  );
+  await page.goto(url, { waitUntil: "networkidle0" })
   let shotResult = await page
     .screenshot()
     .then((result) => {
@@ -78,8 +79,7 @@ async function doSnapshots(news_sites) {
       }
     } catch (e) {
       console.error(
-        `[${
-          news_sites[i]["name"] || "Unknown site"
+        `[${news_sites[i]["name"] || "Unknown site"
         }] Error in snapshotting news`,
         e
       );
