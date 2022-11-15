@@ -17,11 +17,18 @@ async function doScreenCapture(url, site_name) {
     public_id: `newsshot/${site_name}`,
   };
   const browser = await puppeteer.launch({
+    headless: true,
     executablePath: "/usr/bin/google-chrome",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: [
+      "--no-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-setuid-sandbox",
+      "--disable-gpu",
+    ],
+    ignoreDefaultArgs: ["--disable-extensions"]
   });
   const page = await browser.newPage();
-  await page.goto(url, { waitUntil: "networkidle0" });
+  await page.goto(url, { waitUntil: "networkidle0" }); //networkidle0
   let shotResult = await page
     .screenshot()
     .then((result) => {
