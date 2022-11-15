@@ -33,8 +33,8 @@ RUN apt-get update && apt-get install gnupg wget -y && \
 # you'll need to launch puppeteer with:
 #     browser.launch({executablePath: 'google-chrome-stable'})
 # ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-RUN chmod 777 /usr/bin/google-chrome
-RUN chmod 777 /usr/bin/google-chrome-stable
+# RUN chmod 777 /usr/bin/google-chrome
+# RUN chmod 777 /usr/bin/google-chrome-stable
 # Create app directory
 WORKDIR /app
 
@@ -48,8 +48,9 @@ COPY package*.json ./
 COPY . /app
 
 RUN npm install
+#RUN npm install pm2@latest -g
 
 EXPOSE 8080
-CMD [ "node", "index.js" ]
+CMD [ "npm", "start" ]
 
 
