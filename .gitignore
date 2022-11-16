@@ -4,3 +4,4 @@ public
 .env
 .vercel
 .readme
+.DS_Store

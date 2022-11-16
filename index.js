@@ -1,7 +1,7 @@
 'use strict';
 import express from "express";
 const app = express();
-const port = 8080;
+// const port = 8080;
 import { doSnapshots, news_sites } from "./snapshot.js";
 import dotenv from 'dotenv';
 dotenv.config();
@@ -18,6 +18,6 @@ app.get("/restart", (_, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`Example app listening ...`);
 });
